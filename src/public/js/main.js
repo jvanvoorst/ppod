@@ -16,7 +16,7 @@
             default_options = {
                 'url': window.location.href,
                 'unescape': true,
-                'convert_num': true
+                'convert_num': false
             };
 
         if (typeof options !== "object") {
@@ -82,12 +82,14 @@
     }
 
     (function getBookInfo() {
+        var urlParams = urlObject({'url':window.location.href});
+        var isbn = urlParams.parameters.isbn;
+
+        document.getElementById('bookImg').innerHTML = "<img src=\"http://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg\">";
 
         if (window.location) {
-            var urlParams = urlObject({'url':window.location.href});
-            var isbn = urlParams.parameters.isbn;
 
-            document.getElementById('');
+            console.log(isbn);
 
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {

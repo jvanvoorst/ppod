@@ -15,95 +15,96 @@
         <p>The University Libraries does not own this book. By completing this form you are requesting that the Libraries purchase this book for the collection. Regular orders may take up to 2 weeks to arrive. If you need this book immediately, please make that choice below.</p>
     </div>
 
-        <form class="container" action="submit.php" method="post">
-            <!-- First name Last name -->
-            <fieldset class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" name="firstName">
-            </fieldset>
-            <fieldset class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="lastName">
-            </fieldset>
-            <!-- Affiliation -->
-            <fieldset class="radio-group">
-                <legend>Affiliation</legend>
-                <div class="radio">
-                    <label for="grad">
-                        <input id="grad" type="radio" value="grad" name="affiliation">
-                        Graduate Student
-                    </label>
-                </div>
-                <div class="radio">
-                    <label for="faculty">
-                        <input id="faculty" type="radio" value="faculty" name="affiliation">
-                        Faculty
-                    </label>
-                </div>
-                <div class="radio">
-                    <label for="staff">
-                        <input id="staff" type="radio" value="staff" name="affiliation">
-                        Staff
-                    </label>
-                </div>
-            </fieldset>
-            <!-- Department Major -->
-            <fieldset class="form-group">
-                    <label for="department">Department/Major</label>
-                    <input type="text" class="form-control" name="department" id="department">
-            </fieldset>
-            <!-- Email Address -->
-            <fieldset>
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" name="email" id="email">
-            </fieldset>
+    <form class="container" action="submit.php" method="post">
+        <!-- First name Last name -->
+        <fieldset class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName">
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName">
+        </fieldset>
+        <!-- Affiliation -->
+        <fieldset class="radio-group">
+            <legend>Affiliation</legend>
+            <div class="radio">
+                <label for="grad">
+                    <input id="grad" type="radio" value="grad" name="affiliation">
+                    Graduate Student
+                </label>
+            </div>
+            <div class="radio">
+                <label for="faculty">
+                    <input id="faculty" type="radio" value="faculty" name="affiliation">
+                    Faculty
+                </label>
+            </div>
+            <div class="radio">
+                <label for="staff">
+                    <input id="staff" type="radio" value="staff" name="affiliation">
+                    Staff
+                </label>
+            </div>
+        </fieldset>
+        <!-- Department Major -->
+        <fieldset class="form-group">
+                <label for="department">Department/Major</label>
+                <input type="text" class="form-control" name="department" id="department">
+        </fieldset>
+        <!-- Email Address -->
+        <fieldset>
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" name="email" id="email">
+        </fieldset>
 
-            <h1>About the Book</h1>
+        <h1>About the Book</h1>
 
-            <fieldset class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" name="title">
-            </fieldset>
+        <fieldset class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </fieldset>
 
-            <fieldset class="form-group">
-                <label for="author">Author/Publisher</label>
-                <input type="text" class="form-control" id="author" name="author">
-            </fieldset>
+        <fieldset class="form-group">
+            <label for="author">Author/Publisher</label>
+            <input type="text" class="form-control" id="author" name="author">
+        </fieldset>
 
-            <fieldset class="form-group">
-                <label for="other">Other Information</label>
-                <textarea class="form-control" id="other" name="other"></textarea>
-            </fieldset>
+        <fieldset class="form-group">
+            <label for="other">Other Information</label>
+            <textarea class="form-control" id="other" name="other"></textarea>
+        </fieldset>
 
-            <fieldset class="radio-group">
-                <legend>Choose One:</legend>
-                <div class="radio">
-                    <label for="immediately">
-                        <input id="immediately" type="radio" value="immediately" name="priority">
-                        I need this book immediately
-                    </label>
-                </div>
-                <div class="radio">
-                    <label for="week">
-                        <input id="week" type="radio" value="week" name="priority">
-                        I need this book in about a week or so
-                    </label>
-                </div>
-                <div class="radio">
-                    <label for="no-hurry">
-                        <input id="no-hurry" type="radio" value="no-hurry" name="priority">
-                        I am not in a hurry, but please notify me when the book is available
-                    </label>
-                </div>
-            </fieldset>
+        <fieldset class="radio-group">
+            <legend>Choose One:</legend>
+            <div class="radio">
+                <label for="immediately">
+                    <input id="immediately" type="radio" value="immediately" name="priority">
+                    I need this book immediately
+                </label>
+            </div>
+            <div class="radio">
+                <label for="week">
+                    <input id="week" type="radio" value="week" name="priority">
+                    I need this book in about a week or so
+                </label>
+            </div>
+            <div class="radio">
+                <label for="no-hurry">
+                    <input id="no-hurry" type="radio" value="no-hurry" name="priority">
+                    I am not in a hurry, but please notify me when the book is available
+                </label>
+            </div>
+        </fieldset>
 
-            <button type="submit" class="btn btn-warning btn-submit">Submit</button>
+        <button type="submit" class="btn btn-warning btn-submit">Submit</button>
 
-        </form>
+    </form>
 
-    <P>ISBN: <span id="isbn"></span></P>
+    <div id="bookImg" class="container"></div>
+    <div id="bookInfo" class="container"><b>Book info will be listed here</b></div>
 
-    <div id="bookInfo"><b>Book info will be listed here</b></div>
+    <!-- <img src="http://covers.openlibrary.org/b/isbn/0385472579-M.jpg"> -->
 
     <script type="text/javascript" src="./../js/main.js"></script>
 
