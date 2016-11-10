@@ -101,14 +101,11 @@
 
         </form>
 
-        <?php
-            include('./httpful.phar');
-            $url = "https://oasis-services-alpha.proquest.com/stockcheck/?apiKey=7be2d31f-05c7-4937-afb8-4ff0ed98cd17&ISBN=080614839x";
-            $response = \Httpful\Request::get($url)->send();
+    <P>ISBN: <span id="isbn"></span></P>
 
-            echo $response;
+    <div id="bookInfo"><b>Book info will be listed here</b></div>
 
-        ?>
+    <script type="text/javascript" src="./../js/main.js"></script>
 
     </body>
 
