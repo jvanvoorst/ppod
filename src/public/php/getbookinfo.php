@@ -3,12 +3,10 @@
 
     include('./httpful.phar');
 
-    $isbn = $_REQUEST['q'];
+    $isbn = $_GET['isbn'];
     $apiKey = '7be2d31f-05c7-4937-afb8-4ff0ed98cd17';
     $url = 'https://oasis-services-alpha.proquest.com/stockcheck/?apiKey=' . $apiKey . '&ISBN=' . $isbn;
-    $imageUrl = 'http://covers.openlibrary.org/b/isbn/' . $isbn . '-M.jpg';
     $response = \Httpful\Request::get($url)->send();
-
     $res = json_decode($response);
 
     echo $isbn;

@@ -1,108 +1,103 @@
  // function to create object from url and it's parameters
-    function urlObject(options) {
-        "use strict";
-        /*global window, document*/
+function urlObject(options) {
+    "use strict";
+    /*global window, document*/
 
-        var url_search_arr,
-            option_key,
-            i,
-            urlObj,
-            get_param,
-            key,
-            val,
-            url_query,
-            url_get_params = {},
-            a = document.createElement('a'),
-            default_options = {
-                'url': window.location.href,
-                'unescape': true,
-                'convert_num': false
-            };
-
-        if (typeof options !== "object") {
-            options = default_options;
-        } else {
-            for (option_key in default_options) {
-                if (default_options.hasOwnProperty(option_key)) {
-                    if (options[option_key] === undefined) {
-                        options[option_key] = default_options[option_key];
-                    }
-                }
-            }
-        }
-
-        a.href = options.url;
-        url_query = a.search.substring(1);
-        url_search_arr = url_query.split('&');
-
-        if (url_search_arr[0].length > 1) {
-            for (i = 0; i < url_search_arr.length; i += 1) {
-                get_param = url_search_arr[i].split("=");
-
-                if (options.unescape) {
-                    key = decodeURI(get_param[0]);
-                    val = decodeURI(get_param[1]);
-                } else {
-                    key = get_param[0];
-                    val = get_param[1];
-                }
-
-                if (options.convert_num) {
-                    if (val.match(/^\d+$/)) {
-                        val = parseInt(val, 10);
-                    } else if (val.match(/^\d+\.\d+$/)) {
-                        val = parseFloat(val);
-                    }
-                }
-
-                if (url_get_params[key] === undefined) {
-                    url_get_params[key] = val;
-                } else if (typeof url_get_params[key] === "string") {
-                    url_get_params[key] = [url_get_params[key], val];
-                } else {
-                    url_get_params[key].push(val);
-                }
-
-                get_param = [];
-            }
-        }
-
-        urlObj = {
-            protocol: a.protocol,
-            hostname: a.hostname,
-            host: a.host,
-            port: a.port,
-            hash: a.hash.substr(1),
-            pathname: a.pathname,
-            search: a.search,
-            parameters: url_get_params
+    var url_search_arr,
+        option_key,
+        i,
+        urlObj,
+        get_param,
+        key,
+        val,
+        url_query,
+        url_get_params = {},
+        a = document.createElement('a'),
+        default_options = {
+            'url': window.location.href,
+            'unescape': true,
+            'convert_num': false
         };
 
-        return urlObj;
+    if (typeof options !== "object") {
+        options = default_options;
+    } else {
+        for (option_key in default_options) {
+            if (default_options.hasOwnProperty(option_key)) {
+                if (options[option_key] === undefined) {
+                    options[option_key] = default_options[option_key];
+                }
+            }
+        }
     }
 
-    (function getBookInfo() {
-        var urlParams = urlObject({'url':window.location.href});
-        var isbn = urlParams.parameters.isbn;
+    a.href = options.url;
+    url_query = a.search.substring(1);
+    url_search_arr = url_query.split('&');
 
-        document.getElementById('bookImg').innerHTML = "<img src=\"http://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg\">";
+    if (url_search_arr[0].length > 1) {
+        for (i = 0; i < url_search_arr.length; i += 1) {
+            get_param = url_search_arr[i].split("=");
 
-        if (window.location) {
+            if (options.unescape) {
+                key = decodeURI(get_param[0]);
+                val = decodeURI(get_param[1]);
+            } else {
+                key = get_param[0];
+                val = get_param[1];
+            }
 
-            console.log(isbn);
-
-            xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if(this.readyState == 4 && this.status == 200) {
-                    // var res = eval('('+this.responseText+')');
-                    console.log(this.responseText);
-                    document.getElementById('bookInfo').innerHTML = this.responseText;
+            if (options.convert_num) {
+                if (val.match(/^\d+$/)) {
+                    val = parseInt(val, 10);
+                } else if (val.match(/^\d+\.\d+$/)) {
+                    val = parseFloat(val);
                 }
+            }
 
-            };
-            xmlhttp.open('GET','./../php/getbookinfo.php?q=' + isbn, true);
-            xmlhttp.send();
+            if (url_get_params[key] === undefined) {
+                url_get_params[key] = val;
+            } else if (typeof url_get_params[key] === "string") {
+                url_get_params[key] = [url_get_params[key], val];
+            } else {
+                url_get_params[key].push(val);
+            }
+
+            get_param = [];
         }
+    }
 
-    })();
-    
+    urlObj = {
+        protocol: a.protocol,
+        hostname: a.hostname,
+        host: a.host,
+        port: a.port,
+        hash: a.hash.substr(1),
+        pathname: a.pathname,
+        search: a.search,
+        parameters: url_get_params
+    };
+
+    return urlObj;
+}
+
+(function getBookInfo() {
+    var urlParams = urlObject({'url':window.location.href});
+    var isbn = urlParams.parameters.isbn;
+    document.getElementById('bookImg').innerHTML = "<img src=\"http://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg\">";
+    $.ajax({
+        url: './../php/getbookinfo.php',
+        type: 'get',
+        data: {'isbn' : isbn},
+        success: function(data, status) {
+            console.log(status);
+            console.log(data);
+            document.getElementById('bookInfo').innerHTML = data;
+        },
+        error: function(xhr, desc, err) {
+            console.log(xhr);
+            console.log("Details: " + desc + "\nError: " + err);
+        }
+    });
+})();
+
