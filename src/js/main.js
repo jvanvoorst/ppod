@@ -81,17 +81,19 @@ function urlObject(options) {
     return urlObj;
 }
 
-(function getBookInfo() {
+$(function() {
+    // grab url parameters
     var urlParams = urlObject({'url':window.location.href});
     var isbn = urlParams.parameters.isbn;
+
+    // load book cover image based on isbn
     document.getElementById('bookImg').innerHTML = "<img src=\"http://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg\">";
+    // retrieve book data from Coutts
     $.ajax({
-        url: './../php/getbookinfo.php',
-        type: 'get',
+        url: 'php/getbookinfo.php',
+        type: 'GET',
         data: {'isbn' : isbn},
         success: function(data, status) {
-            console.log(status);
-            console.log(data);
             document.getElementById('bookInfo').innerHTML = data;
         },
         error: function(xhr, desc, err) {
@@ -99,5 +101,24 @@ function urlObject(options) {
             console.log("Details: " + desc + "\nError: " + err);
         }
     });
-})();
+    // Submit action
+    $('#submitBtn').on('click', function(event) {
+        event.preventDefault();
+        $(submitBtn).fadeOut(300);
+
+        $.ajax({
+            url: 'php/submit.php',
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function(data, status) {
+                console.log(data);
+            },
+            error: function(xhr, desc, err) {
+                console.log(xhr);
+                console.log("Details: " + desc + "\nError: " + err);
+            }
+        });
+    });
+});
+
 
