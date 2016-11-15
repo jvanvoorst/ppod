@@ -2,10 +2,11 @@
 <?php
 
     include('./../resources/lib/httpful/httpful.phar');
+    include('./../resources/config.php');
 
     $isbn = $_GET['isbn'];
-    $apiKey = '7be2d31f-05c7-4937-afb8-4ff0ed98cd17';
-    $url = 'https://oasis-services-alpha.proquest.com/stockcheck/?apiKey=' . $apiKey . '&ISBN=' . $isbn;
+    $url =  $config['pqApi']['testUrl'] . $config['pqApi']['key'] . '&ISBN=' . $isbn;
+
     $response = \Httpful\Request::get($url)->send();
     $res = json_decode($response);
 
