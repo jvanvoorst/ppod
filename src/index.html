@@ -6,8 +6,10 @@
         <title>Print Purchase on Demand</title>
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
     </head>
 
     <body>
@@ -21,30 +23,30 @@
         <!-- First name Last name -->
         <fieldset class="form-group">
             <label for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName">
+            <input type="text" class="form-control" id="firstName" name="firstName" required>
         </fieldset>
         <fieldset class="form-group">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName">
+            <input type="text" class="form-control" id="lastName" name="lastName" required>
         </fieldset>
         <!-- Affiliation -->
         <fieldset class="radio-group">
             <legend>Affiliation</legend>
             <div class="radio">
                 <label for="grad">
-                    <input id="grad" type="radio" value="grad" name="affiliation">
+                    <input id="grad" type="radio" value="grad" name="affiliation" required>
                     Graduate Student
                 </label>
             </div>
             <div class="radio">
                 <label for="faculty">
-                    <input id="faculty" type="radio" value="faculty" name="affiliation">
+                    <input id="faculty" type="radio" value="faculty" name="affiliation" required>
                     Faculty
                 </label>
             </div>
             <div class="radio">
                 <label for="staff">
-                    <input id="staff" type="radio" value="staff" name="affiliation">
+                    <input id="staff" type="radio" value="staff" name="affiliation" required>
                     Staff
                 </label>
             </div>
@@ -52,61 +54,57 @@
         <!-- Department Major -->
         <fieldset class="form-group">
                 <label for="department">Department/Major</label>
-                <input type="text" class="form-control" name="department" id="department">
+                <input type="text" class="form-control" name="department" id="department" required>
         </fieldset>
         <!-- Email Address -->
         <fieldset>
                 <label for="email">Email Address</label>
-                <input type="email" class="form-control" name="email" id="email">
+                <input type="email" class="form-control" name="email" id="email" required>
         </fieldset>
 
         <h1>About the Book</h1>
 
         <fieldset class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title">
+            <input type="text" class="form-control" id="title" name="title" readonly>
         </fieldset>
 
         <fieldset class="form-group">
             <label for="author">Author/Publisher</label>
-            <input type="text" class="form-control" id="author" name="author">
+            <input type="text" class="form-control" id="author" name="author" readonly>
         </fieldset>
 
         <fieldset class="form-group">
-            <label for="other">Other Information</label>
-            <textarea class="form-control" id="other" name="other"></textarea>
+            <label for="isbn">ISBN</label>
+            <input type="text" class="form-control" id="isbn" name="isbn" readonly>
+        </fieldset>
+
+        <fieldset class="form-group">
+            <label for="deliveryTime">Delivery Time</label>
+            <div id="delivery">
+                <img alt="loading" src="img/spin.svg">
+            </div>
         </fieldset>
 
         <fieldset class="radio-group">
             <legend>Choose One:</legend>
             <div class="radio">
-                <label for="immediately">
-                    <input id="immediately" type="radio" value="immediately" name="priority">
-                    I need this book immediately
+                <label for="regular">
+                    <input id="regular" type="radio" value="regular" name="delivery" required>
+                    The delivery time listed above is sufficient
                 </label>
             </div>
             <div class="radio">
-                <label for="week">
-                    <input id="week" type="radio" value="week" name="priority">
-                    I need this book in about a week or so
-                </label>
-            </div>
-            <div class="radio">
-                <label for="no-hurry">
-                    <input id="no-hurry" type="radio" value="no-hurry" name="priority">
-                    I am not in a hurry, but please notify me when the book is available
+                <label for="expedite">
+                    <input id="expedite" type="radio" value="expedite" name="delivery" required>
+                    I need this book faster
                 </label>
             </div>
         </fieldset>
 
-        <button class="btn btn-warning btn-submit" id="submitBtn">Submit</button>
+        <button type="submit" value="submit" class="btn btn-warning btn-submit" id="submitBtn">Submit</button>
 
     </form>
-
-    <div id="bookImg" class="container"></div>
-    <div id="bookInfo" class="container"><b>Book info will be listed here</b></div>
-
-    <script type="text/javascript" src="js/main.js"></script>
 
     </body>
 

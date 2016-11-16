@@ -81,37 +81,51 @@ function urlObject(options) {
     return urlObj;
 }
 
-$(function() {
-    // grab url parameters
-    var urlParams = urlObject({'url':window.location.href});
-    var isbn = urlParams.parameters.isbn;
+// grab url parameters
+var urlParams = urlObject({'url':window.location.href});
+var isbn = urlParams.parameters.isbn;
+var title = unescape(urlParams.parameters.title);
+var author = unescape(urlParams.parameters.author);
 
-    // load book cover image based on isbn
-    document.getElementById('bookImg').innerHTML = "<img src=\"http://covers.openlibrary.org/b/isbn/" + isbn + "-M.jpg\">";
+console.log('ISBN: ' + isbn);
+console.log('Title: ' + title);
+console.log('Author: ' + author);
+
+$(function() {
     // retrieve book data from Coutts
     $.ajax({
         url: 'php/getbookinfo.php',
         type: 'GET',
-        data: {'isbn' : isbn},
-        success: function(data, status) {
-            document.getElementById('bookInfo').innerHTML = data;
+        data: {'isbn' : urlParams.parameters.isbn},
+        success: function(res, status) {
+            console.log(res);
+            $('#delivery').html(res);
         },
         error: function(xhr, desc, err) {
             console.log(xhr);
             console.log("Details: " + desc + "\nError: " + err);
         }
     });
+
+    // prefill book info
+    $('#title').val(title);
+    $('#author').val(author);
+    $('#isbn').val(isbn);
+    
     // Submit action
-    $('#submitBtn').on('click', function(event) {
+    // $('#submitBtn').on('click', function(event) {
+    $('form').submit( function(event) {        
         event.preventDefault();
         $(submitBtn).fadeOut(300);
+
+        console.log($('form').serialize());
 
         $.ajax({
             url: 'php/submit.php',
             type: 'POST',
             data: $('form').serialize(),
-            success: function(data, status) {
-                console.log(data);
+            success: function(res, status) {
+                console.log(res);
             },
             error: function(xhr, desc, err) {
                 console.log(xhr);
