@@ -98,7 +98,6 @@ $(function() {
         type: 'GET',
         data: {'isbn' : urlParams.parameters.isbn},
         success: function(res, status) {
-            console.log(res);
             $('#delivery').html(res);
         },
         error: function(xhr, desc, err) {

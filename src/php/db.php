@@ -2,13 +2,13 @@
 
 include('./../resources/config.php');
 
-$connection = new PDO(
+$db = new PDO(
 	"mysql:host={$config["db"]["host"]};dbname={$config["db"]["dbName"]}",
 	$config["db"]["userName"],
 	$config["db"]["password"]
 );
 
-$query = $connection->query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_TYPE='BASE TABLE'");
+$query = $db->query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_TYPE='BASE TABLE'");
 $tables = $query->fetchAll(PDO::FETCH_COLUMN);
 
 if (empty($tables)) {
