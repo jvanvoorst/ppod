@@ -14,6 +14,12 @@ $config = array(
 	)
 );
 
+$db = new PDO(
+	"mysql:host={$config["db"]["host"]};dbname={$config["db"]["dbName"]}",
+	$config["db"]["userName"],
+	$config["db"]["password"]
+);
+
 // docker.dev/index.html?isbn=9780833060396&title=Mergers%20and%20acquisitions%2C entrepreneurship%20and%20innovation&author=Bydlowska%2C%20Jowita
 
 // docker.dev/index.php?isbn=9781928088219&author=Skibsrud, Johanna, 1980-, author.&title=The description of the world / Johanna Skibsrud
