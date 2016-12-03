@@ -17,17 +17,6 @@ $delivery = $_POST['delivery'];
 
 $url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn;
 
-echo $isbn;
-echo $title;
-echo $author;
-echo $firstName;
-echo $lastName;
-echo $affiliation;
-echo $department;
-echo $email;
-echo $delivery;
-
-
 // insert into db
 try {
     // set the PDO error mode to exception
@@ -44,9 +33,10 @@ catch(PDOException $e) {
 
 $conn = null;
 
-exit();
+// send email
+$msg = "this is a test email";
+mail($config['email']['to'], $config['email']['subject'], $msg);
 
-// , title, author, firstname, lastname, affiliation, department, email, delivery
-// , $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery
+exit();
 
 ?>
