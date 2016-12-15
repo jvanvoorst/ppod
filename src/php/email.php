@@ -13,7 +13,7 @@ require_once 'Mail.php';
     $recipients = 'vanvoors@colorado.edu';
 
     $headers['From']    = 'richard@example.com';
-    $headers['To']      = 'joe@example.com';
+    $headers['To']      = 'vanvoors@example.com';
     $headers['Subject'] = 'Test message';
 
     $body = 'Test message';
@@ -22,7 +22,7 @@ require_once 'Mail.php';
     $smtpinfo["port"] = "25";
     $smtpinfo["auth"] = true;
     $smtpinfo["username"] = "vanvoors";
-    $smtpinfo["password"] = "";
+    $smtpinfo["password"] = "1wanttoclimb!";
 
 
     // Create the mail object using the Mail::factory method
