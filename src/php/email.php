@@ -1,33 +1,21 @@
 <?php
 
-
-
-// include('./../resources/config.php');
-
-// $msg = "this is a test email";
-// mail($config['email']['to'], $config['email']['subject'], $msg);
-// echo "<p>email sent</P>";
-
+include('./../resources/config.php');
 require_once 'Mail.php';
 
-    $recipients = 'vanvoors@colorado.edu';
+$recipients = 'justin.vanvoorst@colorado.edu';
 
-    $headers['From']    = 'richard@example.com';
-    $headers['To']      = 'vanvoors@example.com';
-    $headers['Subject'] = 'Test message';
+$body = 'adding a little more so maybe it works';
 
-    $body = 'Test message';
+// Create the mail object using the Mail::factory method
+$mail_object =& Mail::factory("smtp", $config["smtp"]); 
 
-    $smtpinfo["host"] = "smtp.colorado.edu";
-    $smtpinfo["port"] = "25";
-    $smtpinfo["auth"] = true;
-    $smtpinfo["username"] = "vanvoors";
-    $smtpinfo["password"] = "1wanttoclimb!";
+$mail_object->send($config["recipients"], $config["headerOrder"], $body);
 
-
-    // Create the mail object using the Mail::factory method
-    $mail_object =& Mail::factory("smtp", $smtpinfo); 
-
-    $mail_object->send($recipients, $headers, $body);
+if (PEAR::isError($mail)) {
+      echo("<p>" . $mail->getMessage() . "</p>");
+    } else {
+      echo("<p>Message successfully sent!</p>");
+    }
 
 ?>
