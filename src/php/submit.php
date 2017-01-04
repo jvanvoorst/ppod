@@ -2,7 +2,8 @@
 
 include('./../resources/lib/httpful/httpful.phar');
 include('./../resources/config.php');
-
+include('email.php');
+// require_once 'Mail.php';
 
 // get data from POST
 $isbn = $_POST['isbn'];
@@ -14,9 +15,7 @@ $affiliation = $_POST['affiliation'];
 $department = $_POST['department'];
 $email = $_POST['email'];
 $delivery = $_POST['delivery'];
-
-$url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn;
-
+	
 // insert into db
 try {
     // set the PDO error mode to exception
@@ -30,13 +29,23 @@ try {
 catch(PDOException $e) {
     echo $sql . "<br>" . $e->getMessage();
 }
-
 $conn = null;
 
-// send email
-$msg = "this is a test email";
-mail($config['email']['to'], $config['email']['subject'], $msg);
+// if delivery speed is regular order book and send email
+if ($delivery == "regular") {
+	// email
+	
+
+ 	// order with ProQuest API
+    $url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn;
+    $response = \Httpful\Request::get($url)->send();
+
+// else just send email with details
+} else { 
+	sendMail($isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery);
+}
+
+
 
 exit();
-
 ?>
