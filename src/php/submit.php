@@ -3,7 +3,8 @@
 include('./../resources/lib/httpful/httpful.phar');
 include('./../resources/config.php');
 include('email.php');
-// require_once 'Mail.php';
+
+echo("something");
 
 // get data from POST
 $isbn = $_POST['isbn'];
@@ -33,19 +34,20 @@ $conn = null;
 
 // if delivery speed is regular order book and send email
 if ($delivery == "regular") {
-	// email
-	
+	echo("regular delivery");
+	// set appropriate header and call email function
+	$header = $smtp["headerRegular"];
+	sendMail($header, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery);
 
  	// order with ProQuest API
     $url =  $config['pqApi']['order'] . $config['pqApi']['key'] . '&ISBN=' . $isbn;
-    $response = \Httpful\Request::get($url)->send();
+    // $response = \Httpful\Request::get($url)->send();
 
-// else just send email with details
+// else delivery speed is expedite, set header and call email function
 } else { 
-	sendMail($isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery);
+	echo("rush deliveery");
+	$header = $smtp["headerRush"];
+	sendMail($header, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery);
 }
 
-
-
-exit();
 ?>
