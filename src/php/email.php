@@ -3,10 +3,10 @@
 include('./../resources/config.php');
 require_once 'Mail.php';
 
-function sendMail($header, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery) {
+function sendMail($header, $isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron) {
     global $smtp;
     // create message body
-    $body = createBody($isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery);
+    $body = createBody($isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron);
     // create mail object
     $mail_object =& Mail::factory("smtp", $smtp["smtp"]);
     // send email
@@ -19,9 +19,9 @@ function sendMail($header, $isbn, $title, $author, $firstName, $lastName, $affil
     }
 }
 
-function createBody ($isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery) {
+function createBody ($isbn, $title, $author, $firstName, $lastName, $affiliation, $department, $email, $delivery, $deliveryTime, $deliveryTimePatron) {
     global $smtp;
-    $book = "Book\nISBN: " . $isbn ."\nTitle: " . $title . "\nAuthor: " . $author . "\n\n";
+    $book = "Book\nISBN: " . $isbn ."\nTitle: " . $title . "\nAuthor: " . $author . "\nDelivery Time: " . $deliveryTime . " days (from Coutts)" . "\n\n";
     $patron = "Patron\nName: " . $firstName . " " . $lastName . "\nAffiliation: " . $affiliation . "\nDepartment: " . $department . "\nEmail: " . $email;
 
     if ($delivery == "regular") {

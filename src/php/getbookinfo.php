@@ -10,7 +10,8 @@ $url =  $config['pqApi']['stockCheck'] . $config['pqApi']['key'] . '&ISBN=' . $i
 $response = \Httpful\Request::get($url)->send();
 $res = json_decode($response);
 
-echo "<input class=\"form-control\" type=\"text\" value=\"$res->DeliveryDays days\" readonly>";
+echo $res->DeliveryDays;
+// echo "<input class=\"form-control\" type=\"text\" value=\"$res->DeliveryDays days\" readonly>";
 
 exit();
 

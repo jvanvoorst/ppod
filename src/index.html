@@ -80,10 +80,15 @@
         </fieldset>
 
         <fieldset class="form-group">
-            <label for="deliveryTime">Delivery Time</label>
-            <div id="delivery">
+            <label for="deliveryTimePatron">Delivery Time (business days)</label>
+            <div id="deliveryTimePatron">
                 <img alt="loading" src="img/spin.svg">
             </div>
+        </fieldset>
+
+        <fieldset class="form-group" hidden>
+            <label for="deliveryTime">Delivery Time (real)</label>
+            <input type="text" class="form-control" id="deliveryTime" name="deliveryTime" readonly>
         </fieldset>
 
         <fieldset class="radio-group">
@@ -95,8 +100,8 @@
                 </label>
             </div>
             <div class="radio">
-                <label for="expedite">
-                    <input id="expedite" type="radio" value="rush" name="delivery" required>
+                <label for="rush">
+                    <input id="rush" type="radio" value="rush" name="delivery" required>
                     I need this book faster
                 </label>
             </div>

@@ -18,6 +18,8 @@ try {
     department VARCHAR(100) NULL,
     email VARCHAR(50) NULL,
     delivery VARCHAR(10) NULL,
+    deliveryTime INT(6) NULL,
+    deliveryTimePatron INT(6) NULL,
     date TIMESTAMP
     )";
 

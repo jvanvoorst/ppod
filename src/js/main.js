@@ -98,7 +98,9 @@ $(function() {
         type: 'GET',
         data: {'isbn' : urlParams.parameters.isbn},
         success: function(res, status) {
-            $('#delivery').html(res);
+            var patronDate = adjustDate(Number(res));
+            $('#deliveryTimePatron').html("<input class=\"form-control\" type=\"text\" value=\"" + patronDate + "\" name=\"deliveryTimePatron\" readonly>");
+            $('#deliveryTime').val(Number(res));
         },
         error: function(xhr, desc, err) {
             console.log(xhr);
@@ -112,12 +114,9 @@ $(function() {
     $('#isbn').val(isbn);
     
     // Submit action
-    // $('#submitBtn').on('click', function(event) {
     $('form').submit( function(event) {        
         event.preventDefault();
         $(submitBtn).fadeOut(300);
-
-        console.log($('form').serialize());
 
         $.ajax({
             url: 'php/submit.php',
@@ -133,5 +132,13 @@ $(function() {
         });
     });
 });
+
+function adjustDate(date) {
+    if (date < 5) {
+        return 7;
+    } else {
+        return date + 2;
+    }
+}
 
 
