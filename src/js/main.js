@@ -134,10 +134,10 @@ $(function() {
 });
 
 function adjustDate(date) {
-    if (date < 5) {
-        return 7;
+    if (date < 2) {
+        return 5;
     } else {
-        return date + 2;
+        return date + 4;
     }
 }
 

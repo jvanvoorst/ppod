@@ -80,12 +80,13 @@
         </fieldset>
 
         <fieldset class="form-group">
-            <label for="deliveryTimePatron">Delivery Time (business days)</label>
+            <label for="deliveryTimePatron">Estimated Delivery Time (business days)</label>
             <div id="deliveryTimePatron">
                 <img alt="loading" src="img/spin.svg">
             </div>
         </fieldset>
 
+        <!-- hidden input for the real delivery time returned from Coutts -->
         <fieldset class="form-group" hidden>
             <label for="deliveryTime">Delivery Time (real)</label>
             <input type="text" class="form-control" id="deliveryTime" name="deliveryTime" readonly>
